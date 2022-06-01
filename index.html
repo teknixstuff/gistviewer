@@ -2,14 +2,15 @@
 document.write('<script src="https://api.allorigins.win/raw?url=https://gist.github.com/'+new URLSearchParams(location.search).get('id')+'.js"><\/script>');
 window.addEventListener('load',()=>{
   Array.prototype.forEach.call(document.querySelectorAll('.gist-file'),async(play)=>{
-    if (!play.querySelector('.gist-meta a:nth-child(2)').innerText.endsWith('.html ')) {return;}
-    var frame = document.createElement('iframe');
-    frame.srcdoc = await fetch('https://api.allorigins.win/raw?url=https://gist.github.com/'+new URLSearchParams(location.search).get('user')+'/'+new URLSearchParams(location.search).get('id')+'/raw/'+(play.querySelector('.gist-meta a:nth-child(2)').innerText.trim())).then(r=>r.text());
-    frame.style.border = 'none';
-    frame.style.width = '100%';
-    play.querySelector('.gist-data .file .data').appendChild(frame);
-    frame.contentWindow.addEventListener('resize',()=>frame.style.height = frame.contentWindow.document.body.clientHeight + 'px')
-    frame.contentWindow.addEventListener('DOMContentLoaded',()=>frame.style.height = frame.contentWindow.document.body.clientHeight + 'px')
+    if (play.querySelector('.gist-meta a:nth-child(2)').innerText.endsWith('.html ')) {
+      var frame = document.createElement('iframe');
+      frame.srcdoc = await fetch('https://api.allorigins.win/raw?url=https://gist.github.com/'+new URLSearchParams(location.search).get('user')+'/'+new URLSearchParams(location.search).get('id')+'/raw/'+(play.querySelector('.gist-meta a:nth-child(2)').innerText.trim())).then(r=>r.text());
+      frame.style.border = 'none';
+      frame.style.width = '100%';
+      play.querySelector('.gist-data .file .data').appendChild(frame);
+      frame.contentWindow.addEventListener('resize',()=>frame.style.height = frame.contentWindow.document.body.clientHeight + 'px')
+      frame.contentWindow.addEventListener('DOMContentLoaded',()=>frame.style.height = frame.contentWindow.document.body.clientHeight + 'px')
+    }
   });
 });
 </script>
