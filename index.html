@@ -11,6 +11,13 @@ window.addEventListener('load',()=>{
       frame.contentWindow.addEventListener('resize',()=>frame.style.height = frame.contentWindow.document.body.clientHeight + 'px')
       frame.contentWindow.addEventListener('DOMContentLoaded',()=>frame.style.height = frame.contentWindow.document.body.clientHeight + 'px')
     }
+    var collapse = document.createElement("a");
+    collapse.href = "javascript:undefined;"
+    collapse.onclick = ()=>{
+      play.querySelector('.gist-data').style.display = play.querySelector('.gist-data').style.display ? '' : 'none';
+    }
+    collapse.style.float = 'right';
+    play.querySelector('.gist-meta').appendChild(collapse);
   });
 });
 </script>
