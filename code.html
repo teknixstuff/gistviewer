@@ -1,0 +1,24 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/styles/github.min.css">
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/highlightjs-line-numbers.js/dist/highlightjs-line-numbers.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded',() => {
+  var run = document.getElementById('code');
+  var el = document.getElementById('code');
+  var win;
+  run.addEventListener('click',()=>{
+    if (!win || win.closed) {
+      win = open('','','width=0');
+    }
+    win.document.open();
+    win.document.write(el.innerText);
+    win.document.close();
+  });
+  var params = new URLSearchParams(location.search);
+  el.innerText = await fetch('https://api.allorigins.win/raw?url=https://gist.github.com/'+params.get('user')+'/'+params.get('id')+'/raw/'+params.get('file')).then(r=>r.text());
+  hljs.highlightElement(el);
+  hljs.lineNumbersBlock(el);
+});
+</script>
+<div><a href="javascript:undefined;" id="loadpop">Run</a></div>
+<div><xmp id="code" contenteditable="true"></xmp></div>
